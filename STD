@@ -1,0 +1,137 @@
+Para realizar seu trabalho da faculdade com segurança no Kali Linux e usando o VirtualBox, vou te guiar pelo processo de uma forma simples. O que você precisa fazer é escolher **dois softwares de segurança** que vêm com a distribuição Kali Linux, configurar e executar esses programas, e depois documentar o processo no seu relatório técnico.
+
+Aqui está um guia passo a passo para realizar esse trabalho:
+
+### Passo 1: Escolher dois softwares de segurança no Kali Linux
+
+Kali Linux vem com vários softwares de segurança, e o ideal é escolher ferramentas que sejam práticas e que você possa explicar facilmente como funcionam. Vou sugerir duas ferramentas populares para você:
+
+1. **Nmap** (Network Mapper) – Para fazer varreduras de rede e descobrir vulnerabilidades em máquinas.
+2. **Metasploit Framework** – Para explorar vulnerabilidades e realizar testes de penetração em um ambiente controlado.
+
+Essas ferramentas são amplamente usadas em segurança cibernética e têm uma ampla documentação, o que facilita a explicação no seu relatório.
+
+### Passo 2: Preparar o ambiente no VirtualBox
+
+Já que você está usando o Kali Linux em uma máquina virtual no VirtualBox, o próximo passo é garantir que sua configuração esteja correta:
+
+1. **Criar a rede interna ou "host-only"**:
+   - No VirtualBox, vá em **Configurações** da sua máquina Kali Linux e, em "Rede", configure a interface de rede para **"Rede Interna"** ou **"Adaptador somente-anfitrião"**. Isso ajuda a manter o tráfego isolado para testes de segurança sem comprometer sua rede real.
+
+2. **Crie uma máquina virtual alvo** (opcional):
+   - Se você quer testar ataques, pode criar outra máquina virtual com um sistema operacional vulnerável, como uma máquina com **Metasploitable** (um sistema vulnerável intencionalmente projetado para testes). Caso não tenha uma máquina de teste, pode simular testes apenas no Kali Linux mesmo, mas uma máquina alvo facilita o trabalho.
+
+### Passo 3: Usar o Nmap
+
+O Nmap é uma das ferramentas mais poderosas de varredura de rede. Ele pode ser usado para identificar hosts ativos e portas abertas em uma rede.
+
+1. **Abrir o terminal do Kali Linux**.
+2. **Comando básico para escanear uma rede**:
+
+   Suponha que você tenha o endereço IP da máquina alvo (se você tiver uma máquina virtual de testes, use o IP dela). O comando básico seria:
+
+   ```bash
+   nmap -sP 192.168.1.0/24
+   ```
+
+   - `-sP`: faz uma varredura para identificar quais hosts estão ativos na rede.
+   - `192.168.1.0/24`: especifica o intervalo de IPs a ser escaneado (ajuste conforme o IP da sua rede ou da máquina de testes).
+
+3. **Exemplo de varredura de portas abertas em uma máquina específica**:
+
+   Se você conhece o IP de uma máquina e quer verificar as portas abertas nela:
+
+   ```bash
+   nmap 192.168.1.10
+   ```
+
+   Isso vai retornar uma lista das portas abertas na máquina de destino.
+
+**Relatório para o Nmap**:
+- Comando usado
+- Resultado da varredura (escreva o que o comando retornou)
+- Explicação do que o Nmap fez durante o processo.
+
+### Passo 4: Usar o Metasploit Framework
+
+O Metasploit Framework é uma plataforma usada para explorar vulnerabilidades e realizar testes de penetração. Vamos ver um exemplo básico de como usá-lo para explorar uma máquina.
+
+1. **Iniciar o Metasploit**:
+
+   Abra o terminal e digite:
+
+   ```bash
+   msfconsole
+   ```
+
+2. **Procurar por exploits disponíveis**:
+
+   Para procurar por um exploit, você pode usar o comando `search` no Metasploit. Por exemplo, se você sabe que a máquina alvo está rodando uma versão vulnerável do Apache:
+
+   ```bash
+   search apache
+   ```
+
+3. **Escolher um exploit**:
+
+   Depois de encontrar o exploit, você escolhe ele usando o comando `use`:
+
+   ```bash
+   use exploit/unix/webapp/php_cgi_arg_injection
+   ```
+
+4. **Configurar o exploit**:
+
+   Agora você precisa configurar os parâmetros, como o IP da máquina de destino:
+
+   ```bash
+   set RHOSTS 192.168.1.10
+   set RPORT 80
+   ```
+
+5. **Rodar o exploit**:
+
+   Para rodar o exploit, use o comando:
+
+   ```bash
+   exploit
+   ```
+
+**Relatório para o Metasploit**:
+- Exploit escolhido
+- Configuração realizada (comandos `set`)
+- Resultado do ataque (se o exploit foi bem-sucedido ou não)
+
+### Passo 5: Documentação do Relatório Técnico
+
+Agora que você já fez os testes com o Nmap e o Metasploit, o próximo passo é documentar tudo em um **relatório técnico**. Lembre-se de que o relatório deve ser claro e bem organizado.
+
+**Estrutura sugerida para o relatório**:
+
+1. **Introdução**:
+   - Explique o objetivo do trabalho e as ferramentas escolhidas (Nmap e Metasploit).
+
+2. **Ambiente de Testes**:
+   - Descreva o ambiente de rede e as máquinas virtuais utilizadas (incluindo configurações de rede no VirtualBox).
+   
+3. **Procedimentos**:
+   - Detalhe os comandos usados para o Nmap e Metasploit.
+   - Inclua capturas de tela dos resultados e explique o que você está vendo.
+
+4. **Resultados**:
+   - Apresente os resultados das varreduras do Nmap e dos testes de exploração com o Metasploit.
+   - Explique como os testes foram realizados e o que foi observado.
+
+5. **Conclusão**:
+   - Conclua com uma análise sobre a eficácia das ferramentas e como elas podem ser usadas em um cenário real.
+
+6. **Referências**:
+   - Liste fontes que você usou para aprender sobre as ferramentas (se houver).
+
+### Passo 6: Apresentação no VirtualBox
+
+Quando for apresentar, faça uma demonstração das ferramentas em ação. Abra o Kali Linux no VirtualBox, mostre a execução dos comandos e explique o que cada um faz.
+
+---
+
+Se precisar de mais detalhes ou ajuda com algum dos passos, fique à vontade para perguntar!
